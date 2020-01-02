@@ -15,8 +15,7 @@ const Home = ({ slug }) => (
 );
 
 Home.getInitialProps = async ({ query }) => {
-
-  const slug=query.slug;
+  const slug = query.slug;
   return { slug };
 };
 

@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "../components/layout";
-import "../style.scss";
+import "../styles/main.scss";
 function MyApp({ Component, pageProps }) {
   return (
     <Layout>
