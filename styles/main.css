@@ -151,11 +151,12 @@ template {
 }
 /* Formalize */
 * {
-  &,
-  &:before,
-  &:after {
-    box-sizing: inherit;
-  }
+  box-sizing: inherit;
+}
+
+*:before,
+*:after {
+  box-sizing: border-box;
 }
 
 html {
@@ -229,6 +230,6 @@ table {
 td {
   padding: 0;
 }
-@import "./\ variables";
-@import "./mixins";
-@import "./global";
+/* */
+@import "./variables.css";
+@import "./global.css";

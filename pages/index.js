@@ -5,12 +5,13 @@ import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 
 const Home = ({ slug }) => (
-  <div>
+  <div className="page-content flex-content">
     <Head>
       <title>Home</title>
       <link rel="icon" href="/favicon.ico" />
     </Head>
-    Anasayfa {slug}
+    <div>Left</div>
+    <div>Right</div>
   </div>
 );
 

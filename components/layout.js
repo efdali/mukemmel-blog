@@ -18,8 +18,18 @@ const Layout = ({ children }) => (
       <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
       <meta name="copyright" content="(c) 2020" />
     </Head>
-    <Header />
-    {children}
+    <div className="wrapper">
+      <Header />
+      {children}
+      <style>{`
+        .wrapper{
+          max-width:1088px;
+          margin-left:auto;
+          margin-right:auto;
+          background-color:var(--container-bg-color);
+        }
+      `}</style>
+    </div>
   </>
 );
 

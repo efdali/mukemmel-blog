@@ -1,0 +1,16 @@
+:root {
+  --main-blue: #00a2ff;
+  --bg-color: #e4e4e4;
+  --container-bg-color: #fff;
+  --font-color: #000;
+
+  --finger-size: 40px;
+  --font-size: 16px;
+  --big-font-size: 1.3em;
+  --small-font-size: 0.8em;
+
+
+  --tablet-size: 768px;
+  --desktop-size:992px;
+  --large-size:1200px;
+}
