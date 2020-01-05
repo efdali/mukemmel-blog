@@ -3,54 +3,85 @@ import Link from "next/link";
 import { FaTwitter, FaLinkedin, FaSearch, FaCog, FaBars } from "react-icons/fa";
 const Header = () => {
   const [showHamburger, setShowHamburger] = useState(false);
+
+  const HeaderTop = ({ className }) => (
+    <div className={`header-social ${className}`}>
+      <Link href="#">
+        <a>abone ol</a>
+      </Link>
+      <Link href="#">
+        <a>
+          <FaTwitter className="icon" />
+        </a>
+      </Link>
+      <Link href="#">
+        <a>
+          <FaLinkedin className="icon" />
+        </a>
+      </Link>
+      <style jsx>{`
+        .header-social {
+          display: flex;
+          justify-content: end;
+          align-items: center;
+          width: 100%;
+          margin-bottom: 8px;
+        }
+        .header-social > a {
+          margin-left: 20px;
+        }
+        :global(.header-social > a > .icon) {
+          color: var(--main-blue);
+          font-size: calc(var(--big-font-size) + 0.4em);
+        }
+      `}</style>
+    </div>
+  );
+
+  const HeaderNav = ({search,nav}) => (
+    <>
+      <div className={`search ${search}`}>
+        <FaSearch className="icon" />
+        <form>
+          <input type="text" placeholder="ara" className="search-input" />
+        </form>
+      </div>
+      <nav className={`header-nav ${nav}`}>
+        <Link href="/">
+          <a>Kategoriler</a>
+        </Link>
+        <Link href="/hakkimda">
+          <a>Hakkımda</a>
+        </Link>
+        <button className="icon-btn">
+          <FaCog />
+        </button>
+      </nav>
+    </>
+  );
   return (
     <header className="header">
       <div className="header-container">
-        <div className="header-container-top">
-          <Link href="#">
-            <a>abone ol</a>
-          </Link>
-          <Link href="#">
-            <a>
-              <FaTwitter className="icon" />
-            </a>
-          </Link>
-          <Link href="#">
-            <a>
-              <FaLinkedin className="icon" />
-            </a>
-          </Link>
-        </div>
+        <HeaderTop className="desktop" />
         <div className="header-container-sub">
           <Link href="/">
             <a className="header-brand">mukemmel</a>
           </Link>
           <div className="desktop-show">
-            <div className="search">
-              <FaSearch className="icon" />
-              <form>
-                <input type="text" placeholder="ara" className="search-input" />
-              </form>
-            </div>
-            <nav className="header-nav">
-              <Link href="/">
-                <a>Kategoriler</a>
-              </Link>
-              <Link href="/hakkimda">
-                <a>Hakkımda</a>
-              </Link>
-              <button className="icon-btn">
-                <FaCog />
-              </button>
-            </nav>
+            <HeaderNav />
           </div>
-          <button className="icon-btn menu-btn" onClick={()=>setShowHamburger(!showHamburger)} type="button">
+          <button
+            className="icon-btn menu-btn"
+            onClick={() => setShowHamburger(!showHamburger)}
+            type="button"
+          >
             <FaBars className="menu-icon" />
           </button>
         </div>
       </div>
       <div className={`hamburger-menu ${showHamburger ? "show" : ""}`}>
-        hamburger menu
+        <HeaderNav search="mobile-search" nav="mobile-nav"/>
+        <HeaderTop className="mobile-header-top"/>
       </div>
       <style jsx>{`
         .header {
@@ -71,9 +102,6 @@ const Header = () => {
           flex-direction: column;
           align-items: center;
           width: 100%;
-        }
-        .header-container-top {
-          display: none;
         }
         .header-container-sub {
           width: 100%;
@@ -102,6 +130,7 @@ const Header = () => {
           box-shadow: 10px 0 30px var(--font-color);
           right: 0;
           top: 0;
+          padding-top: 59px;
           transition: 0.3s all;
           transform: translateX(100%);
           opacity: 0;
@@ -115,16 +144,6 @@ const Header = () => {
             height: 130px;
             padding-top: 10px;
             display: block;
-          }
-          .header-container-top {
-            display: flex;
-            justify-content: end;
-            align-items: center;
-            width: 100%;
-            margin-bottom: 8px;
-          }
-          .header-container-top > a {
-            margin-left: 20px;
           }
           .desktop-show {
             flex: 1;
@@ -140,9 +159,8 @@ const Header = () => {
         }
       `}</style>
       <style jsx global>{`
-        .header-container-top > a > .icon {
-          color: var(--main-blue);
-          font-size: calc(var(--big-font-size) + 0.4em);
+        .desktop {
+          display: none !important;
         }
         .search {
           background-color: var(--container-bg-color);
@@ -174,6 +192,34 @@ const Header = () => {
         .header-nav > button {
           margin-left: 25px;
           font-size: var(--big-font-size);
+        }
+
+        .mobile-search{
+          width:90%;
+          margin-left:auto;
+          margin-right:auto;
+          margin-top:20px;
+        }
+        .mobile-nav{
+          display:flex;
+          flex-direction:column;
+          align-items:center;
+          margin-top:30px;
+        }
+        .mobile-nav > * {
+          margin-top:5px;
+        }
+        .mobile-header-top{
+          flex-direction:column;
+          margin-top:20px;
+        }
+        .mobile-header-top > a:first-child{
+          order:3;
+        }
+        @media screen and (min-width: 768px) {
+          .desktop {
+            display: flex !important;
+          }
         }
       `}</style>
     </header>
