@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { FaTwitter, FaLinkedin, FaSearch, FaCog, FaBars } from "react-icons/fa";
+import Category from "./category";
 const Header = () => {
   const [showHamburger, setShowHamburger] = useState(false);
-
+  const [showCategories, setShowCategories] = useState(false);
   const HeaderTop = ({ className }) => (
     <div className={`header-social ${className}`}>
       <Link href="#">
@@ -27,18 +28,20 @@ const Header = () => {
           width: 100%;
           margin-bottom: 8px;
         }
-        .header-social > a {
-          margin-left: 20px;
-        }
         :global(.header-social > a > .icon) {
           color: var(--main-blue);
           font-size: calc(var(--big-font-size) + 0.4em);
+        }
+        @media screen and (min-width: 768px) {
+          .header-social > a {
+            margin-left: 20px;
+          }
         }
       `}</style>
     </div>
   );
 
-  const HeaderNav = ({search,nav}) => (
+  const HeaderNav = ({ search, nav }) => (
     <>
       <div className={`search ${search}`}>
         <FaSearch className="icon" />
@@ -48,8 +51,19 @@ const Header = () => {
       </div>
       <nav className={`header-nav ${nav}`}>
         <Link href="/">
-          <a>Kategoriler</a>
+          <a
+            onClick={e => {
+              e.preventDefault();
+              setShowCategories(!showCategories);
+            }}
+          >
+            Kategoriler
+          </a>
         </Link>
+        <Category
+          show={showCategories}
+          onMouseLeave={() => setShowCategories(false)}
+        />
         <Link href="/hakkimda">
           <a>Hakkımda</a>
         </Link>
@@ -64,9 +78,11 @@ const Header = () => {
       <div className="header-container">
         <HeaderTop className="desktop" />
         <div className="header-container-sub">
-          <Link href="/">
-            <a className="header-brand">mukemmel</a>
-          </Link>
+          <h1>
+            <Link href="/">
+              <a className="header-brand">mukemmel</a>
+            </Link>
+          </h1>
           <div className="desktop-show">
             <HeaderNav />
           </div>
@@ -80,8 +96,8 @@ const Header = () => {
         </div>
       </div>
       <div className={`hamburger-menu ${showHamburger ? "show" : ""}`}>
-        <HeaderNav search="mobile-search" nav="mobile-nav"/>
-        <HeaderTop className="mobile-header-top"/>
+        <HeaderNav search="mobile-search" nav="mobile-nav" />
+        <HeaderTop className="mobile-header-top" />
       </div>
       <style jsx>{`
         .header {
@@ -134,6 +150,7 @@ const Header = () => {
           transition: 0.3s all;
           transform: translateX(100%);
           opacity: 0;
+          z-index:9;
         }
         .hamburger-menu.show {
           transform: translateX(0);
@@ -149,6 +166,7 @@ const Header = () => {
             flex: 1;
             display: flex;
             margin-left: 45px;
+            align-items: center;
           }
           .menu-btn {
             display: none;
@@ -190,35 +208,39 @@ const Header = () => {
         }
         .header-nav > a,
         .header-nav > button {
-          margin-left: 25px;
           font-size: var(--big-font-size);
         }
 
-        .mobile-search{
-          width:90%;
-          margin-left:auto;
-          margin-right:auto;
-          margin-top:20px;
+        .mobile-search {
+          width: 90%;
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: 20px;
         }
-        .mobile-nav{
-          display:flex;
-          flex-direction:column;
-          align-items:center;
-          margin-top:30px;
+        .mobile-nav {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-top: 30px;
         }
         .mobile-nav > * {
-          margin-top:5px;
+          margin-top: 5px;
+          margin-left: 0;
         }
-        .mobile-header-top{
-          flex-direction:column;
-          margin-top:20px;
+        .mobile-header-top {
+          flex-direction: column;
+          margin-top: 20px;
         }
-        .mobile-header-top > a:first-child{
-          order:3;
+        .mobile-header-top > a:first-child {
+          order: 3;
         }
         @media screen and (min-width: 768px) {
           .desktop {
             display: flex !important;
+          }
+          .header-nav > a,
+          .header-nav > button {
+            margin-left: 25px;
           }
         }
       `}</style>

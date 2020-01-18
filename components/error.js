@@ -9,10 +9,10 @@ const Error = ({ message }) => (
         color: white;
         padding: 20px;
         background: red;
-        &-message {
-          font-size: 1.2em;
-          font-weight: bold;
-        }
+      }
+      .error-message {
+        font-size: 1.2em;
+        font-weight: bold;
       }
     `}</style>
   </div>

@@ -27,6 +27,7 @@ const Layout = ({ children }) => (
           margin-left:auto;
           margin-right:auto;
           background-color:var(--container-bg-color);
+          min-height:100vh;
         }
       `}</style>
     </div>

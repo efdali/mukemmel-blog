@@ -17,6 +17,7 @@
     "react": "16.12.0",
     "react-dom": "16.12.0",
     "react-icons": "^3.8.0",
-    "react-markdown": "^4.2.2"
+    "react-markdown": "^4.2.2",
+    "react-text-ellipsis": "^1.6.0"
   }
 }
