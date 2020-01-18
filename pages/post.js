@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import fetch from "isomorphic-unfetch";
 import Head from "next/head";
 import Link from "next/link";
@@ -8,7 +8,6 @@ import { API_URL } from "../constants";
 import PopularSidebar from "../components/popularSidebar";
 import { Formik, Form, Field, FieldArray } from "formik";
 import * as Yup from "yup";
-import Error from "../components/error";
 const commentSchema = Yup.object().shape({
   name: Yup.string()
     .min(1)
@@ -21,6 +20,7 @@ const commentSchema = Yup.object().shape({
 });
 
 const Post = ({ slug, post, comments, next }) => {
+  const [commentsState, setComments] = useState(comments);
   return (
     <div className="page-content flex-content">
       <Head>
@@ -72,8 +72,13 @@ const Post = ({ slug, post, comments, next }) => {
             <Formik
               initialValues={{ name: "", comment: "" }}
               validationSchema={commentSchema}
-              onSubmit={values => {
-                console.log(JSON.stringify(values));
+              onSubmit={(values, { setValues }) => {
+                const comment = {
+                  user: values.name,
+                  content: values.comment
+                };
+                setComments([comment, ...commentsState]);
+                setValues({ name: "", comment: "" });
               }}
             >
               {({ errors, touched }) => (
@@ -97,7 +102,7 @@ const Post = ({ slug, post, comments, next }) => {
               )}
             </Formik>
 
-            {comments.map((c, i) => (
+            {commentsState.map((c, i) => (
               <div className="comments-item" key={i}>
                 <h3>{c.user}</h3>
                 <p>{c.content}</p>
@@ -112,7 +117,7 @@ const Post = ({ slug, post, comments, next }) => {
           margin-top: 30px;
         }
         .container {
-          max-width: 536px;
+          max-width: 725px;
           width: 100%;
           margin-bottom: 40px;
         }
@@ -226,6 +231,10 @@ const Post = ({ slug, post, comments, next }) => {
         }
         .comments-item > h3 {
           margin-bottom: 6px;
+        }
+        .comments-item > h3 , .comments-item > p{
+          word-break:break-word;
+          white-space:pre-wrap;
         }
       `}</style>
     </div>

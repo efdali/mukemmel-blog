@@ -69,7 +69,7 @@ function About() {
           display: flex;
           align-items: center;
           justify-content: space-evenly;
-          margin-top:95px;
+          margin-top: 95px;
         }
         .about-top-info > div {
           display: flex;
@@ -83,9 +83,9 @@ function About() {
           font-size: 27px;
         }
         .about-top-info-user {
-          position:absolute;
-          top:20px;
-          margin-left:20px;
+          position: absolute;
+          top: 20px;
+          margin-left: 20px;
         }
         .about-top-info-user-img {
           width: 93px;
@@ -98,41 +98,41 @@ function About() {
           margin-top: 10px;
         }
         .about-article {
-          width:100%;
-          padding-left:15px;
-          padding-right:15px;
+          width: 100%;
+          padding-left: 15px;
+          padding-right: 15px;
           margin-top: 30px;
           padding-bottom: 50px;
         }
         @media screen and (min-width: 768px) {
           .about {
-            max-width: 765px;
+            max-width: 890px;
             margin-top: 65px;
             box-shadow: 10px 10px 30px var(--bg-color);
           }
           .about-top-img {
             height: 113px;
           }
-          .about-top-info{
-            margin-top:0;
-            justify-content:space-around;
+          .about-top-info {
+            margin-top: 0;
+            justify-content: space-around;
           }
           .about-top-info-user {
-            position:initial;
+            position: initial;
             margin-top: -90px;
-            margin-left:-20px;
+            margin-left: -20px;
           }
           .about-top-info-user-img {
             width: 158px;
             height: 158px;
           }
           .about-article {
-            width: 536px;
+            width: 760px;
             margin-left: auto;
             margin-right: auto;
-            margin-top:50px;
-            padding-right:0;
-            padding-left:0;
+            margin-top: 50px;
+            padding-right: 0;
+            padding-left: 0;
           }
         }
       `}</style>

@@ -111,7 +111,7 @@ const Header = () => {
           padding-right: 20px;
         }
         .header-container {
-          max-width: 838px;
+          max-width: 1088px;
           margin-left: auto;
           margin-right: auto;
           display: flex;

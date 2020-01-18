@@ -23,7 +23,7 @@ const Layout = ({ children }) => (
       {children}
       <style>{`
         .wrapper{
-          max-width:1088px;
+          max-width:1300px;
           margin-left:auto;
           margin-right:auto;
           background-color:var(--container-bg-color);

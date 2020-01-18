@@ -91,8 +91,8 @@ const Post = ({ post }) => {
         }
         @media screen and (min-width: 768px) {
           .post {
-            max-width: 536px;
-            height: 226px;
+            max-width: 725px;
+            height: 260px;
             margin-bottom: 20px;
             box-shadow: 10px 10px 20px 8px var(--bg-color);
           }
