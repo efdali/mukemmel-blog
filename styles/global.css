@@ -33,12 +33,17 @@ a:hover {
 .icon-btn:hover {
   color: var(--main-blue);
 }
-
+.default-input{
+  border:none;
+  outline:none;
+  resize: none;
+  padding:  4px 10px;
+}
 @media screen and (min-width: 768px) {
   .page-content {
     padding-left: 10px;
     padding-right: 10px;
-    padding-top: 20px;
+    margin-top: 36px;
   }
   .flex-content{
     flex-direction: row;
