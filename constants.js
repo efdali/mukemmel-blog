@@ -1,1 +1,2 @@
-export const API_URL="http://localhost/mukemmel-blog-api";
+export const API_URL="http://kuzenbilisim.com/mukemmel-blog";
+export const IMAGE_URL="http://kuzenbilisim.com/mukemmel-blog";

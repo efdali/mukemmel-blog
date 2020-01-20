@@ -4,7 +4,7 @@ import Head from "next/head";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import { FaArrowRight, FaTags } from "react-icons/fa";
-import { API_URL } from "../constants";
+import { API_URL, IMAGE_URL } from "../constants";
 import PopularSidebar from "../components/popularSidebar";
 import { Formik, Form, Field, FieldArray } from "formik";
 import * as Yup from "yup";
@@ -19,7 +19,7 @@ const commentSchema = Yup.object().shape({
     .required("Zorunlu Alan")
 });
 
-const Post = ({ slug, post, comments, next }) => {
+const Post = ({ post, comments, next }) => {
   const [commentsState, setComments] = useState(comments);
   return (
     <div className="page-content flex-content">
@@ -40,86 +40,100 @@ const Post = ({ slug, post, comments, next }) => {
             </h3>
           </div>
         )}
-        <div className="post">
-          <div className="post-info">
-            <div
-              className="post-info-overlay"
-              style={{
-                backgroundImage: `url(http://localhost/mukemmel-blog-api/${post.big_image})`
-              }}
-            ></div>
-            <h2 className="post-info-title">{post.title}</h2>
-            <div className="post-info-small">
-              <Link href={`/k/${post.category_slug}`}>
-                <a className="post-info-small-item">{post.category}</a>
-              </Link>
-              <small className="post-info-small-item">{post.createdAt}</small>
+        {post && (
+          <div className="post">
+            <div className="post-info">
+              <div
+                className="post-info-overlay"
+                style={{
+                  backgroundImage: `url(${IMAGE_URL}${post.big_image})`
+                }}
+              ></div>
+              <h2 className="post-info-title">{post.title}</h2>
+              <div className="post-info-small">
+                <Link href={`/k/${post.category_slug}`}>
+                  <a className="post-info-small-item">{post.category}</a>
+                </Link>
+                <small className="post-info-small-item">{post.createdAt}</small>
+              </div>
+            </div>
+            <article className="post-content">
+              <ReactMarkdown source={post.content} />
+            </article>
+            <div className="post-tags">
+              <FaTags className="post-tags-icon" />
+              {post.tags.split(",").map((t, i) => (
+                <Link href={`/arama?s=${t}`} key={i}>
+                  <a className="post-tags-item">{t}</a>
+                </Link>
+              ))}
+            </div>
+            <div className="comments">
+              <h2>Yorumlar</h2>
+              <Formik
+                initialValues={{ name: "", comment: "" }}
+                validationSchema={commentSchema}
+                onSubmit={(values, { setValues }) => {
+                  const comment = {
+                    user: values.name,
+                    content: values.comment
+                  };
+                  fetch(API_URL + "/comment/add", {
+                    method: "POST",
+                    body: JSON.stringify({
+                      user: values.name,
+                      comment: values.comment,
+                      postId: post.post_id
+                    })
+                  })
+                    .then(res => res.json())
+                    .then(res => {
+                      if (res.status) {
+                        setComments([comment, ...commentsState]);
+                        setValues({ name: "", comment: "" });
+                      }
+                    });
+                }}
+              >
+                {({ errors, touched }) => (
+                  <Form className="comment-form">
+                    <Field
+                      name="name"
+                      placeholder="isim"
+                      className="name-input default-input"
+                    />
+                    <br />
+                    <Field
+                      name="comment"
+                      as="textarea"
+                      placeholder="yorum"
+                      className="comment-textarea default-input"
+                    />
+                    <button type="submit" className="add-comment-btn">
+                      Yorum Yap
+                    </button>
+                  </Form>
+                )}
+              </Formik>
+
+              {commentsState.map((c, i) => (
+                <div className="comments-item" key={i}>
+                  <h3>{c.user}</h3>
+                  <p>{c.content}</p>
+                </div>
+              ))}
             </div>
           </div>
-          <article className="post-content">
-            <ReactMarkdown source={post.content} />
-          </article>
-          <div className="post-tags">
-            <FaTags className="post-tags-icon" />
-            {post.tags.split(",").map((t, i) => (
-              <Link href={`/arama?s=${t}`} key={i}>
-                <a className="post-tags-item">{t}</a>
-              </Link>
-            ))}
-          </div>
-          <div className="comments">
-            <h2>Yorumlar</h2>
-            <Formik
-              initialValues={{ name: "", comment: "" }}
-              validationSchema={commentSchema}
-              onSubmit={(values, { setValues }) => {
-                const comment = {
-                  user: values.name,
-                  content: values.comment
-                };
-                setComments([comment, ...commentsState]);
-                setValues({ name: "", comment: "" });
-              }}
-            >
-              {({ errors, touched }) => (
-                <Form className="comment-form">
-                  <Field
-                    name="name"
-                    placeholder="isim"
-                    className="name-input default-input"
-                  />
-                  <br />
-                  <Field
-                    name="comment"
-                    as="textarea"
-                    placeholder="yorum"
-                    className="comment-textarea default-input"
-                  />
-                  <button type="submit" className="add-comment-btn">
-                    Yorum Yap
-                  </button>
-                </Form>
-              )}
-            </Formik>
-
-            {commentsState.map((c, i) => (
-              <div className="comments-item" key={i}>
-                <h3>{c.user}</h3>
-                <p>{c.content}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+        )}
+        {!post && <div>Böyle bir post yok</div>}
       </div>
       <PopularSidebar />
       <style jsx>{`
-        .page-content {
-          margin-top: 30px;
-        }
         .container {
           max-width: 725px;
           width: 100%;
           margin-bottom: 40px;
+          order: 1;
         }
         .post {
           width: 100%;
@@ -129,9 +143,10 @@ const Post = ({ slug, post, comments, next }) => {
           display: flex;
           justify-content: flex-end;
           align-items: center;
-          margin-bottom: 25px;
+          margin-bottom: 10px;
           font-size: 16px;
           font-weight: bolder;
+          margin-right: 10px;
         }
         :global(.next-post-icon) {
           font-size: 16px;
@@ -139,7 +154,7 @@ const Post = ({ slug, post, comments, next }) => {
         }
         .post-info-overlay {
           width: 100%;
-          height: 104px;
+          height: 161px;
           background: var(--main-blue) center center;
         }
         h2 {
@@ -148,12 +163,15 @@ const Post = ({ slug, post, comments, next }) => {
         .post-info-title {
           padding-left: 25px;
           padding-right: 25px;
-          margin-top: 15px;
+          margin-top: -70px;
+          color: #fff;
         }
         .post-info-small {
-          margin-top: 10px;
+          margin-top: 25px;
           padding-left: 25px;
-          padding-right: 25px;
+          padding-right: 10px;
+          display: flex;
+          justify-content: space-between;
         }
         .post-info-small-item {
           color: #959595;
@@ -192,6 +210,7 @@ const Post = ({ slug, post, comments, next }) => {
           align-items: center;
           flex-wrap: no-wrap;
           margin-right: 16px;
+          margin-bottom: 15px;
         }
         .comments {
           width: 100%;
@@ -216,7 +235,7 @@ const Post = ({ slug, post, comments, next }) => {
         }
         :global(.comment-textarea) {
           width: 326px;
-          height: 62px;
+          height: 90px;
         }
         .add-comment-btn {
           background-color: var(--main-blue);
@@ -224,7 +243,7 @@ const Post = ({ slug, post, comments, next }) => {
           height: 32px;
           cursor: pointer;
           width: 101px;
-          margin-left: 36px;
+          margin-top: 15px;
         }
         .comments-item {
           margin-top: 30px;
@@ -232,9 +251,47 @@ const Post = ({ slug, post, comments, next }) => {
         .comments-item > h3 {
           margin-bottom: 6px;
         }
-        .comments-item > h3 , .comments-item > p{
-          word-break:break-word;
-          white-space:pre-wrap;
+        .comments-item > h3,
+        .comments-item > p {
+          word-break: break-word;
+          white-space: pre-wrap;
+        }
+
+        @media screen and (min-width: 768px) {
+          .page-content {
+            margin-top: 30px;
+          }
+          .container {
+            order: 0;
+          }
+          .next-post {
+            margin-bottom: 25px;
+            margin-right: 0;
+          }
+          .post-info-overlay {
+            height: 104px;
+          }
+          .post-info-title {
+            color: var(--main-blue);
+            margin-top: 15px;
+          }
+          .post-info-small {
+            margin-top: 10px;
+            padding-right: 25px;
+          }
+          .post-tags-item {
+            margin-bottom: 0;
+          }
+          :global(.comment-form) {
+            display: block;
+          }
+          :global(.comment-textarea) {
+            height: 120px;
+            margin-bottom: -7px;
+          }
+          .add-comment-btn {
+            margin-left: 35px;
+          }
         }
       `}</style>
     </div>

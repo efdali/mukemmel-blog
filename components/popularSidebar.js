@@ -3,19 +3,15 @@ import Link from "next/link";
 import PostInfo from "./postInfo";
 import Loading from "./loading";
 import { API_URL } from "../constants";
+import Head from "next/head";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
 const PopularSideBar = () => {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1
-  };
   const [populars, setPopulars] = useState([]);
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (populars.length < 1) {
+    if (populars.length < 1 && !isLoading) {
       fetchPosts();
     }
   }, []);
@@ -29,11 +25,25 @@ const PopularSideBar = () => {
     }
     setLoading(false);
   };
-
+  var settings = {
+    dots: true,
+    autoPlay: true,
+    autoplaySpeed: 500,
+    lazyLoad: true,
+    initialSlide: 1
+  };
   return (
     <div className="populars">
+      <Head>
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
+        />
+      </Head>
       <div className="desktop-populars">
         <h3 className="populars-title">Popüler Yazılar</h3>
+        {isLoading && <Loading />}
         <ul>
           {populars.map((p, i) => (
             <li key={i}>
@@ -47,22 +57,25 @@ const PopularSideBar = () => {
         </ul>
       </div>
       <div className="mobile-populars">
-        {populars.map((p, i) => (
-          <PostInfo
-            title={p.title}
-            post_slug={p.post_slug}
-            createdAt={p.createdAt}
-            category={p.category}
-            category_slug={p.category_slug}
-            big_image={p.big_image}
-            key={i}
-          />
-        ))}
+        <Slider {...settings}>
+          {populars.map((p, i) => (
+            <PostInfo
+              title={p.title}
+              post_slug={p.post_slug}
+              createdAt={p.createdAt}
+              category={p.category}
+              category_slug={p.category_slug}
+              big_image={p.big_image}
+              isSlider={true}
+              key={i}
+            />
+          ))}
+        </Slider>
       </div>
       <style jsx>{`
         .populars {
           width: 100%;
-          margin-bottom: 10px;
+          margin-bottom: 30px;
         }
         .desktop-populars {
           display: none;
@@ -85,6 +98,7 @@ const PopularSideBar = () => {
             max-width: 260px;
             padding: 20px;
             box-shadow: 10px 10px 30px var(--bg-color);
+            margin-bottom: 0;
           }
           .populars-title {
             display: initial;

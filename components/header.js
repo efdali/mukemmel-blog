@@ -45,8 +45,8 @@ const Header = () => {
     <>
       <div className={`search ${search}`}>
         <FaSearch className="icon" />
-        <form>
-          <input type="text" placeholder="ara" className="search-input" />
+        <form method="GET" action="/arama">
+          <input type="text" placeholder="ara" className="search-input" name="s"/>
         </form>
       </div>
       <nav className={`header-nav ${nav}`}>

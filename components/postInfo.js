@@ -1,12 +1,13 @@
 import React from "react";
 import Link from "next/link";
 import PropTypes from "prop-types";
+import { IMAGE_URL } from "../constants";
 const PostInfo = props => {
   return (
     <div
-      className="post-top"
+      className={`post-top ${props.isSlider ? "slider-top" : ""}`}
       style={{
-        backgroundImage: `url(http://localhost/mukemmel-blog-api${props.big_image})`
+        backgroundImage: `url(${IMAGE_URL}${props.big_image})`
       }}
     >
       <div
@@ -37,6 +38,14 @@ const PostInfo = props => {
           color: #fff;
           font-size: var(--font-size);
           padding: 8px 16px;
+        }
+        .post-top.slider-top {
+          height: 165px;
+          padding-top: 30px;
+          padding-bottom: 15px;
+        }
+        .post-top.slider-top > .post-top-info {
+          color: #fff;
         }
         .post-top-info {
           display: flex;
@@ -78,6 +87,13 @@ const PostInfo = props => {
           .post-title > a {
             font-size: 18px;
           }
+          :global(.slick-dots li.slick-active button::before) {
+            color: var(--main-blue);
+          }
+          :global(.slick-dots li button::before) {
+            font-size: 8px;
+            color: var(--main-blue);
+          }
         }
       `}</style>
     </div>
@@ -90,9 +106,11 @@ PostInfo.propTypes = {
   category: PropTypes.string.isRequired,
   category_slug: PropTypes.string.isRequired,
   big_image: PropTypes.string.isRequired,
-  extraClass: PropTypes.bool
+  extraClass: PropTypes.bool,
+  isSlider: PropTypes.bool
 };
 PostInfo.defaultProps = {
-  extraClass: false
+  extraClass: false,
+  isSlider: false
 };
 export default PostInfo;
