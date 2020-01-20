@@ -85,7 +85,6 @@ function About() {
         .about-top-info-user {
           position: absolute;
           top: 20px;
-          margin-left: 20px;
         }
         .about-top-info-user-img {
           width: 93px;
@@ -120,7 +119,6 @@ function About() {
           .about-top-info-user {
             position: initial;
             margin-top: -90px;
-            margin-left: -20px;
           }
           .about-top-info-user-img {
             width: 158px;

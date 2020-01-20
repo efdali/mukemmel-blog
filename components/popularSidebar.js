@@ -6,6 +6,7 @@ import { API_URL } from "../constants";
 import Head from "next/head";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
+import fetch from 'isomorphic-unfetch';
 const PopularSideBar = () => {
   const [populars, setPopulars] = useState([]);
   const [isLoading, setLoading] = useState(false);
@@ -45,31 +46,36 @@ const PopularSideBar = () => {
         <h3 className="populars-title">Popüler Yazılar</h3>
         {isLoading && <Loading />}
         <ul>
-          {populars.map((p, i) => (
-            <li key={i}>
-              <h4>
-                <Link href={`/p/${p.post_slug}`}>
-                  <a>{p.title}</a>
-                </Link>
-              </h4>
-            </li>
-          ))}
+          {populars.length > 0 &&
+            populars.map((p, i) => (
+              <li key={i}>
+                <h4>
+                  <Link href={`/p/${p.post_slug}`}>
+                    <a>{p.title}</a>
+                  </Link>
+                </h4>
+              </li>
+            ))}
+          {populars.length == 0 && !isLoading && (
+            <div>Henüz Popüler Post Yok!</div>
+          )}
         </ul>
       </div>
       <div className="mobile-populars">
         <Slider {...settings}>
-          {populars.map((p, i) => (
-            <PostInfo
-              title={p.title}
-              post_slug={p.post_slug}
-              createdAt={p.createdAt}
-              category={p.category}
-              category_slug={p.category_slug}
-              big_image={p.big_image}
-              isSlider={true}
-              key={i}
-            />
-          ))}
+          {populars.length > 0 &&
+            populars.map((p, i) => (
+              <PostInfo
+                title={p.title}
+                post_slug={p.post_slug}
+                createdAt={p.createdAt}
+                category={p.category}
+                category_slug={p.category_slug}
+                big_image={p.big_image}
+                isSlider={true}
+                key={i}
+              />
+            ))}
         </Slider>
       </div>
       <style jsx>{`

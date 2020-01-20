@@ -8,7 +8,7 @@ import PopularSideBar from "../components/popularSidebar";
 const Home = ({ posts, count, slug }) => (
   <div className="page-content flex-content">
     <Head>
-      <title>Mükemmel Blog</title>
+      <title>{`${slug ? `${slug} |` : ''} Mükemmel Blog`}</title>
       <link rel="icon" href="/favicon.ico" />
     </Head>
     <PostList posts={posts} count={count} slug={slug} />

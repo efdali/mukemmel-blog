@@ -24,7 +24,9 @@ const Post = ({ post, comments, next }) => {
   return (
     <div className="page-content flex-content">
       <Head>
-        <title>Post İçerik Sayfası</title>
+        <title>{post.title}</title>
+        <meta name="keywords" content={post.tags} />
+        <meta name="description" content={`${post.title} - ${post.tags}`} />
       </Head>
 
       <div className="container">

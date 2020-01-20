@@ -4,19 +4,22 @@ import fetch from "isomorphic-unfetch";
 import PropTypes from "prop-types";
 import { API_URL } from "../constants";
 import Error from "./error";
+import Loading from "./loading";
 const Category = ({ show, onMouseLeave }) => {
   const [categories, setCategories] = useState([]);
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     if (
       (show && categories.length == 0) ||
-      document.documentElement.clientWidth < 768 
+      document.documentElement.clientWidth < 768
     ) {
       fetchCategories();
     }
   }, []);
 
   const fetchCategories = () => {
+    setLoading(true);
     fetch(`${API_URL}/category`)
       .then(res => res.json())
       .then(res => {
@@ -25,20 +28,23 @@ const Category = ({ show, onMouseLeave }) => {
         } else {
           setMessage(res.message);
         }
+        setLoading(false);
       });
   };
   if (show && message && categories.length < 1) {
-    return <Error />;
+    return <Error message={message} />;
   }
   return (
     <ul className={`${show ? "show" : ""}`} onMouseLeave={onMouseLeave}>
-      {categories.map((c, i) => (
-        <li key={i}>
-          <Link href={`/k/${c.slug}`}>
-            <a>{c.name}</a>
-          </Link>
-        </li>
-      ))}
+      {loading && <Loading />}
+      {categories.length > 0 &&
+        categories.map((c, i) => (
+          <li key={i}>
+            <Link href={`/k/${c.slug}`}>
+              <a>{c.name}</a>
+            </Link>
+          </li>
+        ))}
       <style jsx>{`
         ul {
           position: relative;

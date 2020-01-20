@@ -1,10 +1,25 @@
+import Link from "next/link";
+
 function Error({ statusCode }) {
   return (
-    <p>
-      {statusCode
-        ? `An error ${statusCode} occurred on server`
-        : "An error occurred on client"}
-    </p>
+    <div className="page-content">
+      <Link href="/">
+        <a>Anasayfa &rarr;</a>
+      </Link>
+      <img src="/error.jpg" alt="Hata!" />
+      <style jsx>{`
+        img {
+          width: 100%;
+        }
+        a{
+          font-size:var(--big-font-size);
+          margin-top:15px;
+          margin-bottom:15px;
+          display:block;
+          text-align:right;
+        }
+      `}</style>
+    </div>
   );
 }
 

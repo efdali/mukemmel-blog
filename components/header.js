@@ -10,12 +10,12 @@ const Header = () => {
       <Link href="#">
         <a>abone ol</a>
       </Link>
-      <Link href="#">
+      <Link href="https://twitter.com/Ncesuefdal">
         <a>
           <FaTwitter className="icon" />
         </a>
       </Link>
-      <Link href="#">
+      <Link href="https://www.linkedin.com/in/efdalincesu/">
         <a>
           <FaLinkedin className="icon" />
         </a>

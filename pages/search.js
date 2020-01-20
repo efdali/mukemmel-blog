@@ -34,6 +34,8 @@ const Search = ({ s, posts, count }) => {
           margin-bottom: 20px;
           display: flex;
           align-items: center;
+          flex-wrap:wrap;
+          margin-top:20px;
         }
         .search-wrapper > form input {
           box-shadow: 10px 10px 30px var(--bg-color);
@@ -46,6 +48,9 @@ const Search = ({ s, posts, count }) => {
           .container {
             max-width: 725px;
             width: 100%;
+          }
+          .search-wrapper{
+            margin-top:0;
           }
         }
       `}</style>

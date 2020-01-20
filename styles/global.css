@@ -2,6 +2,8 @@ body {
   font-size: var(--font-size);
   color: var(--font-color);
   background-color: var(--bg-color);
+  width:100%;
+  overflow: hidden;
 }
 a {
   color: var(--font-color);
