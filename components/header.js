@@ -2,13 +2,59 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { FaTwitter, FaLinkedin, FaSearch, FaCog, FaBars } from "react-icons/fa";
 import Category from "./category";
+import Modal from "react-modal";
+
+const customStyles = {
+  content: {
+    top: "45%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    transform: "translate(-50%, -50%)"
+  }
+};
+Modal.setAppElement("#__next");
+
 const Header = () => {
   const [showHamburger, setShowHamburger] = useState(false);
   const [showCategories, setShowCategories] = useState(false);
+  const [showModal, setShowModal] = useState(true);
+  const [mail, setMail] = useState("");
+  const blur = showModal ? 2 : 0;
+
   const HeaderTop = ({ className }) => (
     <div className={`header-social ${className}`}>
+      <Modal
+        isOpen={showModal}
+        onRequestClose={() => setShowModal(false)}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <div className="subscribe">
+          <form>
+            <input
+              value={mail}
+              onChange={e => {
+                setMail(e.target.value);
+              }}
+              type="text"
+              placeholder="email adresiniz"
+            />
+            <button type="submit" className="default-btn subscribe-btn">
+              Abone Ol
+            </button>
+          </form>
+        </div>
+      </Modal>
       <Link href="#">
-        <a>abone ol</a>
+        <a
+          onClick={e => {
+            e.preventDefault();
+            setShowModal(!showModal);
+          }}
+        >
+          abone ol
+        </a>
       </Link>
       <Link href="https://twitter.com/Ncesuefdal">
         <a>
@@ -28,9 +74,15 @@ const Header = () => {
           width: 100%;
           margin-bottom: 8px;
         }
+        :global(#__next) {
+          -webkit-filter: blur(${blur}px);
+        }
         :global(.header-social > a > .icon) {
           color: var(--main-blue);
           font-size: calc(var(--big-font-size) + 0.4em);
+        }
+        :global(.ReactModal__Overlay.ReactModal__Overlay--after-open) {
+          background-color: initial !important;
         }
         @media screen and (min-width: 768px) {
           .header-social > a {
@@ -46,7 +98,12 @@ const Header = () => {
       <div className={`search ${search}`}>
         <FaSearch className="icon" />
         <form method="GET" action="/arama">
-          <input type="text" placeholder="ara" className="search-input" name="s"/>
+          <input
+            type="text"
+            placeholder="ara"
+            className="search-input"
+            name="s"
+          />
         </form>
       </div>
       <nav className={`header-nav ${nav}`}>
@@ -150,7 +207,7 @@ const Header = () => {
           transition: 0.3s all;
           transform: translateX(100%);
           opacity: 0;
-          z-index:9;
+          z-index: 9;
         }
         .hamburger-menu.show {
           transform: translateX(0);

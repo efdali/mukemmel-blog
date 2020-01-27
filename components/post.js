@@ -48,7 +48,8 @@ const Post = ({ post }) => {
         .post-top {
           width: 100%;
           height: 65px;
-          background: var(--main-blue) center center;
+          background: var(--main-blue) no-repeat center center;
+          background-size:cover;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
@@ -93,7 +94,7 @@ const Post = ({ post }) => {
           .post {
             max-width: 725px;
             height: 260px;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             box-shadow: 10px 10px 20px 8px var(--bg-color);
           }
           .post-top {

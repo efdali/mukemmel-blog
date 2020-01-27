@@ -13,17 +13,7 @@ const Search = ({ s, posts, count }) => {
       </Head>
       <div className="container">
         <div className="search-wrapper">
-          <p>İçinde </p>
-          <form method="GET" action="/arama">
-            <input
-              type="text"
-              name="s"
-              value={q}
-              onChange={e => setQ(e.target.value)}
-              className="default-input"
-            />
-          </form>
-          <p> kelimesi geçen postlar : </p>
+         <p>{s} kelimesi bulunan yazılar ({posts.length ? posts.length : 0}) :</p>
         </div>
         <PostList posts={posts} count={count} slug={`/search/${s}`} />
       </div>
