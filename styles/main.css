@@ -231,5 +231,6 @@ td {
   padding: 0;
 }
 /* */
+@import "./font.css";
 @import "./variables.css";
 @import "./global.css";

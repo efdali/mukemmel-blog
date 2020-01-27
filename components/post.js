@@ -64,17 +64,21 @@ const Post = ({ post }) => {
           justify-content: space-between;
           color: #a1a1a1;
           font-size: var(--small-font-size);
+          font-weight:600;
         }
         .category-link {
           color: #a1a1a1;
+          font-weight:600;
         }
         .post-title,
         .post-title > a {
-          font-size: var(--font-size);
+          font-size: 22px;
           color: #fff;
           word-break: break-word;
           white-space: pre-wrap;
           overflow: hidden;
+          font-weight:600;
+
         }
         .post-bottom {
           padding: 15px 16px 4px;
@@ -82,6 +86,9 @@ const Post = ({ post }) => {
           display: flex;
           flex-direction: column;
           justify-content: space-around;
+        }
+        :global(.post-bottom-content){
+          font-weight:300;
         }
         .read-more-container {
           display: none;
@@ -107,10 +114,6 @@ const Post = ({ post }) => {
           }
           .category-link {
             color: #fff;
-          }
-          .post-title,
-          .post-title > a {
-            font-size: 18px;
           }
           .post-bottom {
             padding-top: 4px;

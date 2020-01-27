@@ -93,11 +93,11 @@ const PopularSideBar = () => {
           padding: 5px 14px;
         }
         li {
-          margin-top: 14px;
+          margin-top: 18px;
           font-size: 14px;
         }
         li > h4 {
-          font-weight: lighter;
+          font-weight: 400;
         }
         @media screen and (min-width: 768px) {
           .populars {
@@ -109,6 +109,7 @@ const PopularSideBar = () => {
           .populars-title {
             display: initial;
             color: var(--main-blue);
+            font-weight:600;
           }
           .desktop-populars {
             display: block;

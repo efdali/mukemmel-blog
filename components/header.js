@@ -6,7 +6,7 @@ import Modal from "react-modal";
 
 const customStyles = {
   content: {
-    top: "45%",
+    top: "40%",
     left: "50%",
     right: "auto",
     bottom: "auto",
@@ -14,33 +14,36 @@ const customStyles = {
   }
 };
 Modal.setAppElement("#__next");
-
-const Header = () => {
-  const [showHamburger, setShowHamburger] = useState(false);
-  const [showCategories, setShowCategories] = useState(false);
-  const [showModal, setShowModal] = useState(true);
-  const [mail, setMail] = useState("");
+const HeaderTop = ({ className }) => {
+  const [mailAddress, setMailAddress] = useState("");
+  const [showModal, setShowModal] = useState(false);
   const blur = showModal ? 2 : 0;
 
-  const HeaderTop = ({ className }) => (
+  const subscribeHandler = e => {
+    e.preventDefault();
+    if (!e) {
+      return false;
+    }
+    setShowModal(false);
+    alert(mailAddress + " mail listesine eklendi.");
+  };
+  return (
     <div className={`header-social ${className}`}>
       <Modal
         isOpen={showModal}
         onRequestClose={() => setShowModal(false)}
         style={customStyles}
-        contentLabel="Example Modal"
       >
         <div className="subscribe">
-          <form>
+          <form onSubmit={subscribeHandler}>
             <input
-              value={mail}
-              onChange={e => {
-                setMail(e.target.value);
-              }}
-              type="text"
-              placeholder="email adresiniz"
+              type="email"
+              className="subscribe-input"
+              placeholder="mail adresiniz"
+              value={mailAddress}
+              onChange={e => setMailAddress(e.target.value)}
             />
-            <button type="submit" className="default-btn subscribe-btn">
+            <button type="submit" className="icon-btn subscribe-btn">
               Abone Ol
             </button>
           </form>
@@ -73,6 +76,24 @@ const Header = () => {
           align-items: center;
           width: 100%;
           margin-bottom: 8px;
+          font-weight:600;
+        }
+        .subscribe > form {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+        .subscribe-input {
+          height: var(--finger-size);
+          line-height: calc(var(--finger-size) - 1px);
+        }
+        .subscribe-btn {
+          background-color: var(--main-blue);
+          color: #fff;
+          width: auto;
+          padding-left: 5px;
+          padding-right: 5px;
+          margin-top:15px;
         }
         :global(#__next) {
           -webkit-filter: blur(${blur}px);
@@ -84,16 +105,26 @@ const Header = () => {
         :global(.ReactModal__Overlay.ReactModal__Overlay--after-open) {
           background-color: initial !important;
         }
+        :global(.ReactModal__Content.ReactModal__Content--after-open) {
+          border: none !important;
+          box-shadow: 0px 6px 19px var(--font-color);
+        }
         @media screen and (min-width: 768px) {
           .header-social > a {
             margin-left: 20px;
+          }
+          .subscribe-btn {
+            margin-left:15px;
+            margin-top:0;
           }
         }
       `}</style>
     </div>
   );
-
-  const HeaderNav = ({ search, nav }) => (
+};
+const HeaderNav = ({ search, nav }) => {
+  const [showCategories, setShowCategories] = useState(false);
+  return (
     <>
       <div className={`search ${search}`}>
         <FaSearch className="icon" />
@@ -130,6 +161,11 @@ const Header = () => {
       </nav>
     </>
   );
+};
+
+const Header = () => {
+  const [showHamburger, setShowHamburger] = useState(false);
+
   return (
     <header className="header">
       <div className="header-container">
@@ -266,8 +302,8 @@ const Header = () => {
         .header-nav > a,
         .header-nav > button {
           font-size: var(--big-font-size);
+          font-weight:400;
         }
-
         .mobile-search {
           width: 90%;
           margin-left: auto;

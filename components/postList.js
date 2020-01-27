@@ -53,12 +53,12 @@ const PostList = props => {
       <style jsx>{`
         .posts-content {
           order: 2;
+          width:100%;
         }
         @media screen and (min-width: 768px) {
           .posts-content {
             order: 0;
             max-width:725px;
-            width:100%;
           }
         }
       `}</style>
