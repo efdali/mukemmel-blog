@@ -157,7 +157,8 @@ const Post = ({ post, comments, next }) => {
         .post-info-overlay {
           width: 100%;
           height: 161px;
-          background: var(--main-blue) center center;
+          background: var(--main-blue) no-repeat center center;
+          background-size:cover;
         }
         h2 {
           color: var(--main-blue);
@@ -167,6 +168,7 @@ const Post = ({ post, comments, next }) => {
           padding-right: 25px;
           margin-top: -70px;
           color: #fff;
+          font-weight:600;
         }
         .post-info-small {
           margin-top: 25px;
@@ -179,13 +181,15 @@ const Post = ({ post, comments, next }) => {
           color: #959595;
           font-size: 13px;
           margin-right: 15px;
-          font-weight: normal;
+          font-weight: 600;
         }
         .post-content {
           padding-left: 25px;
           padding-right: 25px;
           margin-top: 30px;
           margin-bottom: 30px;
+          line-height:initial;
+          font-weight:300;
         }
         :global(.post-content img) {
           max-width: 100%;

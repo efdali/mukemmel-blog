@@ -78,7 +78,6 @@ const Post = ({ post }) => {
           white-space: pre-wrap;
           overflow: hidden;
           font-weight:600;
-
         }
         .post-bottom {
           padding: 15px 16px 4px;
