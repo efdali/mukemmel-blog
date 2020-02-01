@@ -31,7 +31,8 @@ const PostInfo = props => {
         .post-top {
           width: 100%;
           height: 65px;
-          background: var(--main-blue) center center;
+          background: var(--main-blue) no-repeat center center;
+          background-size:cover;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
@@ -70,10 +71,11 @@ const PostInfo = props => {
           word-break: break-word;
           white-space: pre-wrap;
           overflow: hidden;
+          font-weight:400;
         }
         @media screen and (min-width: 768px) {
           .post-top {
-            height: 104px;
+            height: 114px;
           }
           .post-top-info {
             position: initial;

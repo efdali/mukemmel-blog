@@ -6,6 +6,7 @@ const Loading = () => (
     <style jsx>{`
     .loading-container{
         text-align:center;
+        margin-top:10px;
     }
     `}</style>
   </div>

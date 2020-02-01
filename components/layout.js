@@ -17,6 +17,20 @@ const Layout = ({ children }) => (
       <meta name="robots" content="index, follow" />
       <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
       <meta name="copyright" content="(c) 2020" />
+      {/* Global site tag (gtag.js) - Google Analytics */}
+      <script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=UA-144181286-2"
+      />
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-144181286-2');`
+        }}
+      />
     </Head>
     <div className="wrapper">
       <Header />

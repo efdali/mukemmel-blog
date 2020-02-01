@@ -155,7 +155,7 @@ const HeaderNav = ({ search, nav }) => {
         <Link href="/hakkimda">
           <a>Hakkımda</a>
         </Link>
-        <button className="icon-btn">
+        <button className="icon-btn" onClick={()=>alert("Koyu Tema Çok Yakında...")}>
           <FaCog />
         </button>
       </nav>

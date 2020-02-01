@@ -4,10 +4,11 @@ import Link from "next/link";
 import TextEllipsis from "react-text-ellipsis";
 import ReactMarkdown from "react-markdown";
 import PostInfo from "./postInfo";
+import 'aos/dist/aos.css';
 
 const Post = ({ post }) => {
   return (
-    <div className="post">
+    <div className="post" data-aos="fade-up-left">
       <PostInfo
         title={post.title}
         createdAt={post.createdAt}
@@ -45,40 +46,6 @@ const Post = ({ post }) => {
           box-shadow: 0 10px 20px 8px var(--bg-color);
           position: relative;
         }
-        .post-top {
-          width: 100%;
-          height: 65px;
-          background: var(--main-blue) no-repeat center center;
-          background-size:cover;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          color: #fff;
-          font-size: var(--font-size);
-          padding: 8px 16px;
-        }
-        .post-top-info {
-          position: relative;
-          top: 70px;
-          display: flex;
-          justify-content: space-between;
-          color: #a1a1a1;
-          font-size: var(--small-font-size);
-          font-weight:600;
-        }
-        .category-link {
-          color: #a1a1a1;
-          font-weight:600;
-        }
-        .post-title,
-        .post-title > a {
-          font-size: 22px;
-          color: #fff;
-          word-break: break-word;
-          white-space: pre-wrap;
-          overflow: hidden;
-          font-weight:600;
-        }
         .post-bottom {
           padding: 15px 16px 4px;
           flex: 1;
@@ -103,17 +70,6 @@ const Post = ({ post }) => {
             margin-bottom: 30px;
             box-shadow: 10px 10px 20px 8px var(--bg-color);
           }
-          .post-top {
-            height: 104px;
-          }
-          .post-top-info {
-            position: initial;
-            color: inherit;
-            font-size: inherit;
-          }
-          .category-link {
-            color: #fff;
-          }
           .post-bottom {
             padding-top: 4px;
           }
@@ -122,6 +78,10 @@ const Post = ({ post }) => {
           }
         }
       `}</style>
+        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+      <script>
+        AOS.init();
+      </script>
     </div>
   );
 };
