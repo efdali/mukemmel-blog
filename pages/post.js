@@ -166,7 +166,7 @@ const Post = ({ post, comments, next }) => {
         .post-info-title {
           padding-left: 25px;
           padding-right: 25px;
-          margin-top: -70px;
+          margin-top: -35px;
           color: #fff;
           font-weight:600;
         }
