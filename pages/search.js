@@ -17,7 +17,6 @@ const Search = ({ s, posts, count }) => {
         </div>
         <PostList posts={posts} count={count} slug={`/search/${s}`} />
       </div>
-      <PopularSidebar />
       <style jsx>{`
         .search-wrapper {
           width: 100%;
@@ -26,6 +25,7 @@ const Search = ({ s, posts, count }) => {
           align-items: center;
           flex-wrap:wrap;
           margin-top:20px;
+          margin-left:10px;
         }
         .search-wrapper > form input {
           box-shadow: 10px 10px 30px var(--bg-color);
@@ -41,6 +41,7 @@ const Search = ({ s, posts, count }) => {
           }
           .search-wrapper{
             margin-top:0;
+            margin-left:0;
           }
         }
       `}</style>
