@@ -27,7 +27,6 @@ const PostList = props => {
 
   const fetchPosts = async () => {
     setLoading(true);
-    console.log("ok");
     let url = API_URL + "/post";
     if (props.slug) url += props.slug;
     url += `/${page}`;

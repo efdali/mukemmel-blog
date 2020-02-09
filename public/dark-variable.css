@@ -1,5 +1,6 @@
 :root {
-    --bg-color: rgb(17, 17, 17);
-    --container-bg-color: #000;
+    --bg-color: rgba(0,0,0,.9);
+    /* --bg-color: rgb(17, 17, 17); */
+    --container-bg-color: rgb(47,41,41);
     --font-color: #fff;
   }

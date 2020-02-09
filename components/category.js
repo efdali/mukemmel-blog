@@ -16,7 +16,7 @@ const Category = ({ show, onMouseLeave }) => {
     ) {
       fetchCategories();
     }
-  }, []);
+  });
 
   const fetchCategories = () => {
     setLoading(true);
@@ -36,7 +36,7 @@ const Category = ({ show, onMouseLeave }) => {
   }
   return (
     <ul className={`${show ? "show" : ""}`} onMouseLeave={onMouseLeave}>
-      {loading && <Loading />}
+      {loading && categories.length < 1 && <Loading />}
       {categories.length > 0 &&
         categories.map((c, i) => (
           <li key={i}>

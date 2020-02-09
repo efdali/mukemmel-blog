@@ -33,6 +33,7 @@ a:hover {
   cursor: pointer;
   height: var(--finger-size);
   width: var(--finger-size);
+  color:var(--font-color);
 }
 .icon-btn:hover {
   color: var(--main-blue);

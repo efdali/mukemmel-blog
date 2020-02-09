@@ -243,6 +243,11 @@ const Post = ({ post, comments, next }) => {
           width: 326px;
           height: 90px;
         }
+        :global(.name-input) ,:global(.comment-textarea){
+          color:var(--font-color);
+          background-color:var(--container-bg-color);
+          border:1px solid var(--bg-color);
+        }
         .add-comment-btn {
           background-color: var(--main-blue);
           color: #fff;

@@ -1,8 +1,16 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import { FaTwitter, FaLinkedin, FaSearch, FaCog, FaBars } from "react-icons/fa";
+import {
+  FaTwitter,
+  FaLinkedin,
+  FaGithub,
+  FaSearch,
+  FaCog,
+  FaBars
+} from "react-icons/fa";
 import Category from "./category";
 import Modal from "react-modal";
+import Head from "next/head";
 
 const customStyles = {
   content: {
@@ -49,34 +57,32 @@ const HeaderTop = ({ className }) => {
           </form>
         </div>
       </Modal>
-      <Link href="#">
-        <a
-          onClick={e => {
-            e.preventDefault();
-            setShowModal(!showModal);
-          }}
-        >
-          abone ol
-        </a>
-      </Link>
-      <Link href="https://twitter.com/Ncesuefdal">
-        <a>
-          <FaTwitter className="icon" />
-        </a>
-      </Link>
-      <Link href="https://www.linkedin.com/in/efdalincesu/">
-        <a>
-          <FaLinkedin className="icon" />
-        </a>
-      </Link>
+      <a
+        onClick={e => {
+          e.preventDefault();
+          setShowModal(!showModal);
+        }}
+        href="#"
+      >
+        abone ol
+      </a>
+      <a href="https://twitter.com/Ncesuefdal">
+        <FaTwitter className="icon" />
+      </a>
+      <a href="https://www.linkedin.com/in/efdalincesu/">
+        <FaLinkedin className="icon" />
+      </a>
+      <a href="https://www.github.com/efdali/mukemmel-blog">
+        <FaGithub className="icon" />
+      </a>
       <style jsx>{`
         .header-social {
           display: flex;
-          justify-content: end;
+          justify-content: flex-end;
           align-items: center;
           width: 100%;
           margin-bottom: 8px;
-          font-weight:600;
+          font-weight: 600;
         }
         .subscribe > form {
           display: flex;
@@ -93,7 +99,7 @@ const HeaderTop = ({ className }) => {
           width: auto;
           padding-left: 5px;
           padding-right: 5px;
-          margin-top:15px;
+          margin-top: 15px;
         }
         :global(#__next) {
           -webkit-filter: blur(${blur}px);
@@ -114,8 +120,8 @@ const HeaderTop = ({ className }) => {
             margin-left: 20px;
           }
           .subscribe-btn {
-            margin-left:15px;
-            margin-top:0;
+            margin-left: 15px;
+            margin-top: 0;
           }
         }
       `}</style>
@@ -124,8 +130,10 @@ const HeaderTop = ({ className }) => {
 };
 const HeaderNav = ({ search, nav }) => {
   const [showCategories, setShowCategories] = useState(false);
+  const [darkTheme, setDarkTheme] = useState(false);
   return (
     <>
+      {darkTheme && <link rel="stylesheet" href="/dark-variable.css" />}
       <div className={`search ${search}`}>
         <FaSearch className="icon" />
         <form method="GET" action="/arama">
@@ -155,7 +163,12 @@ const HeaderNav = ({ search, nav }) => {
         <Link href="/hakkimda">
           <a>Hakkımda</a>
         </Link>
-        <button className="icon-btn" onClick={()=>alert("Koyu Tema Çok Yakında...")}>
+        <button
+          className="icon-btn"
+          onClick={() => {
+            setDarkTheme(!darkTheme);
+          }}
+        >
           <FaCog />
         </button>
       </nav>
@@ -295,6 +308,8 @@ const Header = () => {
           outline: none;
           width: 100%;
           padding-left: 10px;
+          background-color: var(--container-bg-color);
+          color: var(--font-color);
         }
         .header-nav {
           margin-left: auto;
@@ -302,7 +317,7 @@ const Header = () => {
         .header-nav > a,
         .header-nav > button {
           font-size: var(--big-font-size);
-          font-weight:400;
+          font-weight: 400;
         }
         .mobile-search {
           width: 90%;

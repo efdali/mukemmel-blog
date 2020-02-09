@@ -31,7 +31,8 @@ const PopularSideBar = () => {
     autoPlay: true,
     autoplaySpeed: 500,
     lazyLoad: true,
-    initialSlide: 1
+    initialSlide: 1,
+    arrows:false
   };
   return (
     <div className="populars">

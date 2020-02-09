@@ -68,7 +68,7 @@ const Post = ({ post }) => {
             max-width: 725px;
             height: 260px;
             margin-bottom: 30px;
-            box-shadow: 10px 10px 20px 8px var(--bg-color);
+            box-shadow: 10px 10px 45px 1px var(--bg-color);
           }
           .post-bottom {
             padding-top: 4px;
