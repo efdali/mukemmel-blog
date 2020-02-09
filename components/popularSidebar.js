@@ -15,7 +15,7 @@ const PopularSideBar = () => {
     if (populars.length < 1 && !isLoading) {
       fetchPosts();
     }
-  }, []);
+  });
 
   const fetchPosts = async () => {
     setLoading(true);
